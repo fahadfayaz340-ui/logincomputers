@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Computers - Professional Form Services</title>
+    <title>Login Computers - Advanced Digital Solutions</title>
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            --secondary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --accent-color: #00f2fe;
+            --card-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,46 +24,89 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-primary);
+            background: var(--dark-gradient);
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+        }
+
+        /* Glass Morphism Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(12, 12, 12, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            animation: slideDown 0.8s ease-out;
+            padding: 0 2rem;
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #764ba2;
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
-            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .logo:hover {
-            transform: scale(1.05);
+        .logo::before {
+            content: '💻';
+            -webkit-text-fill-color: initial;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .nav-links {
@@ -62,154 +117,380 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: var(--text-secondary);
             font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
             transition: all 0.3s ease;
             position: relative;
+            overflow: hidden;
         }
 
         .nav-links a:hover {
-            color: #764ba2;
+            color: var(--text-primary);
+            background: var(--glass-bg);
             transform: translateY(-2px);
         }
 
-        .nav-links a::after {
+        .nav-links a::before {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: #764ba2;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
+            top: 0;
+            left: -100%;
             width: 100%;
+            height: 100%;
+            background: var(--secondary-gradient);
+            transition: left 0.3s ease;
+            z-index: -1;
         }
 
+        .nav-links a:hover::before {
+            left: 0;
+        }
+
+        /* Hero Section with 3D Effects */
         .hero {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
-            color: white;
-            text-align: center;
-            padding: 6rem 0;
-            animation: fadeInUp 1s ease-out;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--dark-gradient);
+            position: relative;
+            overflow: hidden;
+            padding: 0;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: slideInLeft 1s ease-out 0.3s both;
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            z-index: 2;
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .hero-text {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
             margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: slideInRight 1s ease-out 0.5s both;
+            line-height: 1.6;
         }
 
-        .cta-button {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
             color: white;
             padding: 1rem 2rem;
-            border: 2px solid white;
-            text-decoration: none;
+            border: none;
             border-radius: 50px;
-            font-weight: bold;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             transition: all 0.3s ease;
-            animation: bounceIn 1s ease-out 0.7s both;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
         }
 
-        .cta-button:hover {
-            background: white;
-            color: #764ba2;
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 35px 60px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: var(--dark-gradient);
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
-        .section {
-            padding: 5rem 0;
-            background: white;
-            margin: 2rem 0;
+        /* 3D Hero Visual */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+
+        .floating-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .section:nth-child(even) {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-
-        .section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #764ba2;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            animation: float3d 6s ease-in-out infinite;
             position: relative;
         }
 
-        .section h2::after {
+        .floating-card::before {
             content: '';
             position: absolute;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--primary-gradient);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        @keyframes float3d {
+            0%, 100% { transform: translateY(0px) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(5deg); }
+        }
+
+        /* Advanced Services Grid */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary-gradient);
+            opacity: 0.1;
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--card-shadow);
+            border-color: var(--accent-color);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Advanced Pricing Cards */
+        .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
-        .service-card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(118, 75, 162, 0.1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(118, 75, 162, 0.2);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #764ba2;
-        }
-
-        .service-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .service-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .contact-form {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 3rem;
+        .pricing-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: 1rem;
+            right: -2rem;
+            background: var(--accent-color);
+            color: var(--dark-gradient);
+            padding: 0.5rem 3rem;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transform: rotate(45deg);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .price-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .price-list p {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .price-list p:last-child {
+            border-bottom: none;
+        }
+
+        /* Interactive Contact Section */
+        .contact-section {
+            background: var(--dark-gradient);
+            position: relative;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            border-color: var(--accent-color);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Advanced Form */
+        .contact-form {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
 
         .form-group {
@@ -219,338 +500,676 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 500;
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 1rem;
-            border: 2px solid #e1e1e1;
-            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
             font-size: 1rem;
             transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
-            border-color: #764ba2;
-            box-shadow: 0 0 20px rgba(118, 75, 162, 0.2);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
             transform: scale(1.02);
         }
 
-        .submit-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 1rem 3rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Quick Contact Buttons */
+        .quick-contact {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .quick-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
             transition: all 0.3s ease;
-            width: 100%;
+            position: relative;
+            overflow: hidden;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(118, 75, 162, 0.3);
-        }
-
-        footer {
-            background: #333;
+        .quick-btn.whatsapp {
+            background: #25D366;
             color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
         }
 
-        .contact-info {
+        .quick-btn.call {
+            background: #FF6B35;
+            color: white;
+        }
+
+        .quick-btn.email {
+            background: #4285F4;
+            color: white;
+        }
+
+        .quick-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            background: var(--primary-gradient);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: white;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gradient);
+            padding: 3rem 0 1rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
-        .contact-card {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .contact-card i {
-            font-size: 2.5rem;
-            color: #764ba2;
+        .footer-section h3 {
+            color: var(--text-primary);
             margin-bottom: 1rem;
+            font-size: 1.2rem;
         }
 
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+            transition: color 0.3s ease;
         }
 
-        @keyframes fadeInUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .footer-section a:hover {
+            color: var(--accent-color);
         }
 
-        @keyframes slideInLeft {
-            from { transform: translateX(-100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-secondary);
         }
 
-        @keyframes slideInRight {
-            from { transform: translateX(100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); }
-            70% { transform: scale(0.9); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-links {
-                flex-direction: column;
-                gap: 1rem;
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
             }
-            
-            .hero h1 {
+
+            .hero-title {
                 font-size: 2.5rem;
             }
-            
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
             .services-grid {
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
     <header>
         <nav class="container">
-            <a href="#" class="logo">💻 Login Computers</a>
+            <a href="#" class="logo">Login Computers</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <h1>Login Computers</h1>
-            <p>Professional form application and computer services. Expert assistance with all your document needs and digital solutions. Fast, reliable, and trusted service.</p>
-            <a href="#contact" class="cta-button">Get Started Today</a>
-        </div>
-    </section>
-
-    <section id="services" class="section">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">📋</div>
-                    <h3>Government Forms</h3>
-                    <p>Aadhaar card applications, PAN card services, passport applications, visa forms, tax documents, voter ID, and other government paperwork assistance.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🏢</div>
-                    <h3>Business Applications</h3>
-                    <p>Business registration, GST registration, trade license applications, shop act license, FSSAI license, and corporate documentation services.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎓</div>
-                    <h3>Educational Forms</h3>
-                    <p>School admissions, college applications, scholarship forms, educational loan applications, migration certificates, and academic documentation.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💼</div>
-                    <h3>Employment Applications</h3>
-                    <p>Job applications, resume creation and formatting, employment verification, EPF applications, and career-related documentation services.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🏥</div>
-                    <h3>Insurance & Medical</h3>
-                    <p>Health insurance applications, life insurance forms, medical claims, disability certificates, and healthcare-related documentation assistance.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔧</div>
-                    <h3>Computer Repair & Maintenance</h3>
-                    <p>Hardware troubleshooting, motherboard repair, RAM upgrades, hard disk replacement, cooling system cleaning, and power supply issues.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💾</div>
-                    <h3>Software Services</h3>
-                    <p>Windows installation, antivirus setup, Microsoft Office installation, software troubleshooting, driver updates, and system optimization.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📱</div>
-                    <h3>Data Recovery & Backup</h3>
-                    <p>Hard drive data recovery, deleted file restoration, USB/pen drive repair, data backup solutions, and cloud storage setup.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🌐</div>
-                    <h3>Internet & Networking</h3>
-                    <p>WiFi setup and troubleshooting, router configuration, internet connectivity issues, network security, and broadband installation support.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🖨️</div>
-                    <h3>Printer & Scanning</h3>
-                    <p>Printer installation and repair, cartridge replacement, scanning services, photocopying, document printing, and lamination services.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💻</div>
-                    <h3>Laptop Services</h3>
-                    <p>Laptop screen replacement, keyboard repair, battery replacement, charging port repair, overheating solutions, and performance upgrades.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎮</div>
-                    <h3>Gaming & Entertainment</h3>
-                    <p>Gaming PC setup, graphics card installation, game installation, media center setup, and entertainment system configuration.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="section">
-        <div class="container">
-            <h2>Why Choose Us?</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">⚡</div>
-                    <h3>Fast Turnaround</h3>
-                    <p>Quick and efficient processing of all your form applications without compromising on quality.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">✅</div>
-                    <h3>100% Accuracy</h3>
-                    <p>Meticulous attention to detail ensures your forms are completed correctly the first time.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔒</div>
-                    <h3>Confidential Service</h3>
-                    <p>Your personal information is handled with the utmost care and confidentiality.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="section">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <div class="contact-info">
-                <div class="contact-card">
-                    <i class="fas fa-phone"></i>
-                    <h3>Phone</h3>
-                    <p>+91 9906405769</p>
-                </div>
-                <div class="contact-card">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Email</h3>
-                    <p>sfayaz2005@gmail.com</p>
-                </div>
-                <div class="contact-card">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Location</h3>
-                    <p>Chadoora, Budgam, Srinagar<br>Jammu & Kashmir</p>
-                </div>
-            </div>
-            
-            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="_replyto" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone">
-                </div>
-                <div class="form-group">
-                    <label for="service">Type of Service Needed</label>
-                    <input type="text" id="service" name="service" placeholder="e.g., Passport Application, Business Registration">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Please describe your requirements..."></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Email</button>
-                
-                <!-- Alternative Contact Options -->
-                <div style="margin-top: 2rem; text-align: center;">
-                    <p style="color: #666; margin-bottom: 1rem;"><strong>Or contact us directly:</strong></p>
-                    
-                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                        <!-- WhatsApp Button -->
-                        <a href="https://wa.me/919906405769?text=Hi%20Fayaz%2C%20I%20need%20help%20with%20form%20applications%20and%20computer%20services" 
-                           target="_blank" 
-                           style="background: #25D366; color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;"
-                           onmouseover="this.style.background='#128C7E'"
-                           onmouseout="this.style.background='#25D366'">
-                            <span style="font-size: 1.2rem;">📱</span> WhatsApp Chat
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Digital Solutions for Modern Kashmir</h1>
+                    <p class="hero-subtitle">Meet <strong>Fayaz Ahmad</strong>, your trusted partner in Chadoora for professional form applications, computer services, and digital solutions. Experience the future of technology services with personalized care.</p>
+                    <div class="hero-cta">
+                        <a href="#contact" class="btn-primary">
+                            <i class="fas fa-rocket"></i> Get Started
                         </a>
-                        
-                        <!-- Google Form Button -->
-                        <a href="https://forms.gle/YOUR_GOOGLE_FORM_LINK" 
-                           target="_blank" 
-                           style="background: #4285F4; color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;"
-                           onmouseover="this.style.background='#3367D6'"
-                           onmouseout="this.style.background='#4285F4'">
-                            <span style="font-size: 1.2rem;">📝</span> Google Form
-                        </a>
-                        
-                        <!-- Direct Call Button -->
-                        <a href="tel:+919906405769" 
-                           style="background: #FF6B35; color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;"
-                           onmouseover="this.style.background='#E55A2B'"
-                           onmouseout="this.style.background='#FF6B35'">
-                            <span style="font-size: 1.2rem;">📞</span> Call Now
+                        <a href="#services" class="btn-secondary">
+                            <i class="fas fa-play"></i> View Services
                         </a>
                     </div>
                 </div>
-            </form>
+                <div class="hero-visual">
+                    <div class="floating-card">
+                        <h3 style="margin-bottom: 1rem;">🚀 Advanced Services</h3>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <span style="background: var(--accent-color); color: var(--dark-gradient); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">Form Applications</span>
+                            <span style="background: var(--accent-color); color: var(--dark-gradient); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">Computer Repair</span>
+                            <span style="background: var(--accent-color); color: var(--dark-gradient); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">Data Recovery</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Statistics -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="500">0</span>
+                    <span class="stat-label">Forms Processed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="200">0</span>
+                    <span class="stat-label">Computers Repaired</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="5">0</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="100">0</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Premium Services</h2>
+            <p class="section-subtitle fade-in">Comprehensive digital solutions tailored for your needs</p>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <span class="service-icon">🆔</span>
+                    <h3>Government Documents</h3>
+                    <p>Aadhaar card applications, PAN card services, passport applications, visa forms, voter ID, driving license, and all government paperwork with expert assistance.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <span class="service-icon">🏢</span>
+                    <h3>Business Registration</h3>
+                    <p>Complete business setup including GST registration, trade licenses, shop act permits, FSSAI licenses, and corporate documentation services.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <span class="service-icon">🔧</span>
+                    <h3>Computer Repair & Maintenance</h3>
+                    <p>Expert hardware troubleshooting, motherboard repair, RAM upgrades, hard disk replacement, cooling system maintenance, and component installation.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <span class="service-icon">💻</span>
+                    <h3>Software Solutions</h3>
+                    <p>Windows installation, Microsoft Office setup, antivirus configuration, software troubleshooting, driver updates, and system optimization services.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <span class="service-icon">📱</span>
+                    <h3>Data Recovery & Backup</h3>
+                    <p>Professional data recovery from crashed drives, deleted file restoration, USB repair, cloud storage setup, and comprehensive backup solutions.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <span class="service-icon">🌐</span>
+                    <h3>Network & Internet Services</h3>
+                    <p>WiFi setup and optimization, router configuration, internet troubleshooting, network security, and broadband installation support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Transparent Pricing</h2>
+            <p class="section-subtitle fade-in">Affordable rates with no hidden charges</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card fade-in">
+                    <div class="service-icon">📋</div>
+                    <h3>Government Forms</h3>
+                    <div class="price-list">
+                        <p><span>Aadhaar Card</span><span>₹50 - ₹100</span></p>
+                        <p><span>PAN Card</span><span>₹150 - ₹200</span></p>
+                        <p><span>Passport Application</span><span>₹300 - ₹500</span></p>
+                        <p><span>Voter ID</span><span>₹100 - ₹150</span></p>
+                        <p><span>Driving License</span><span>₹200 - ₹300</span></p>
+                    </div>
+                    <small style="color: var(--text-secondary);">*Government fees separate</small>
+                </div>
+                
+                <div class="pricing-card featured fade-in">
+                    <div class="service-icon">💻</div>
+                    <h3>Computer Services</h3>
+                    <div class="price-list">
+                        <p><span>System Checkup</span><span>₹200 - ₹300</span></p>
+                        <p><span>Windows Installation</span><span>₹300 - ₹500</span></p>
+                        <p><span>Hardware Repair</span><span>₹500 - ₹1,500</span></p>
+                        <p><span>Data Recovery</span><span>₹500 - ₹2,000</span></p>
+                        <p><span>Laptop Screen Repair</span><span>₹1,500 - ₹3,000</span></p>
+                    </div>
+                    <small style="color: var(--text-secondary);">*Parts cost additional</small>
+                </div>
+                
+                <div class="pricing-card fade-in">
+                    <div class="service-icon">🏢</div>
+                    <h3>Business Services</h3>
+                    <div class="price-list">
+                        <p><span>GST Registration</span><span>₹1,000 - ₹1,500</span></p>
+                        <p><span>Trade License</span><span>₹800 - ₹1,200</span></p>
+                        <p><span>Shop Act License</span><span>₹500 - ₹800</span></p>
+                        <p><span>FSSAI License</span><span>₹600 - ₹1,000</span></p>
+                        <p><span>Business Consultation</span><span>₹300 - ₹500</span></p>
+                    </div>
+                    <small style="color: var(--text-secondary);">*Includes documentation</small>
+                </div>
+            </div>
+            
+            <!-- Special Offers -->
+            <!-- Special Offers -->
+            <div style="background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 3rem; margin-top: 3rem; text-align: center;">
+                <h3 style="margin-bottom: 2rem; color: var(--accent-color);">🎯 Special Offers</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div style="background: rgba(0, 242, 254, 0.1); border: 1px solid var(--accent-color); padding: 1.5rem; border-radius: 15px;">
+                        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">🏠 Home Visit Service</h4>
+                        <p style="color: var(--text-secondary);">Additional ₹100-200 for doorstep service in Chadoora and nearby areas</p>
+                    </div>
+                    <div style="background: rgba(0, 242, 254, 0.1); border: 1px solid var(--accent-color); padding: 1.5rem; border-radius: 15px;">
+                        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">📦 Bulk Discount</h4>
+                        <p style="color: var(--text-secondary);">15% off on 5+ services or multiple form applications</p>
+                    </div>
+                    <div style="background: rgba(0, 242, 254, 0.1); border: 1px solid var(--accent-color); padding: 1.5rem; border-radius: 15px;">
+                        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">⚡ Express Service</h4>
+                        <p style="color: var(--text-secondary);">Same-day service available with priority handling</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Why Choose Login Computers?</h2>
+            <p class="section-subtitle fade-in">Your trusted digital partner in Chadoora</p>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <span class="service-icon">⚡</span>
+                    <h3>Lightning Fast Service</h3>
+                    <p>Quick turnaround times with same-day service options available. We understand your time is valuable and work efficiently to meet your deadlines.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <span class="service-icon">🎯</span>
+                    <h3>100% Accuracy Guaranteed</h3>
+                    <p>Meticulous attention to detail ensures your forms are completed correctly the first time. No rejections, no delays, just perfect results.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <span class="service-icon">🔒</span>
+                    <h3>Secure & Confidential</h3>
+                    <p>Your personal and business information is handled with utmost care and confidentiality. Advanced security measures protect your data.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <span class="service-icon">🏆</span>
+                    <h3>Expert Experience</h3>
+                    <p>5+ years of experience serving Budgam district. Deep knowledge of local requirements and government procedures.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <span class="service-icon">💬</span>
+                    <h3>Local Language Support</h3>
+                    <p>Fluent in Kashmiri, Urdu, Hindi, and English. We communicate in the language you're most comfortable with.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <span class="service-icon">🌟</span>
+                    <h3>Customer First Approach</h3>
+                    <p>Dedicated customer support with free consultations. We're here to guide you through every step of the process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section section">
+        <div class="container">
+            <h2 class="section-title fade-in">Get In Touch</h2>
+            <p class="section-subtitle fade-in">Ready to get started? Contact us today!</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91 9906405769</p>
+                            <small style="color: var(--text-secondary);">Available 9 AM - 8 PM</small>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>sfayaz2005@gmail.com</p>
+                            <small style="color: var(--text-secondary);">Quick response guaranteed</small>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Chadoora, Budgam<br>Srinagar, J&K 191113</p>
+                            <small style="color: var(--text-secondary);">Home visits available</small>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Business Hours</h4>
+                            <p>Mon - Sat: 9:00 AM - 8:00 PM<br>Sunday: Closed</p>
+                            <small style="color: var(--text-secondary);">Emergency service available</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form fade-in">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">Send us a message</h3>
+                    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="_replyto" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="serviceType">Service Required</label>
+                            <select id="serviceType" name="serviceType" required>
+                                <option value="">Select a service</option>
+                                <option value="government-forms">Government Forms</option>
+                                <option value="computer-repair">Computer Repair</option>
+                                <option value="software-installation">Software Installation</option>
+                                <option value="data-recovery">Data Recovery</option>
+                                <option value="business-registration">Business Registration</option>
+                                <option value="network-setup">Network Setup</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="urgency">Urgency Level</label>
+                            <select id="urgency" name="urgency">
+                                <option value="normal">Normal (2-3 days)</option>
+                                <option value="urgent">Urgent (1-2 days)</option>
+                                <option value="emergency">Emergency (Same day)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Detailed Message</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Please describe your requirements in detail..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                    
+                    <!-- Quick Contact Options -->
+                    <div class="quick-contact">
+                        <a href="https://wa.me/919906405769?text=Hi%20Fayaz%20Ahmad%2C%20I%20need%20help%20with%20digital%20services%20at%20Login%20Computers" 
+                           target="_blank" class="quick-btn whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="tel:+919906405769" class="quick-btn call">
+                            <i class="fas fa-phone"></i> Call Now
+                        </a>
+                        <a href="mailto:sfayaz2005@gmail.com" class="quick-btn email">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Login Computers. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Login Computers</h3>
+                    <p>Founded and operated by <strong>Fayaz Ahmad</strong>, your trusted digital partner in Chadoora. Providing comprehensive form application services and computer solutions since 2020.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <a href="#services">Government Forms</a>
+                    <a href="#services">Computer Repair</a>
+                    <a href="#services">Software Installation</a>
+                    <a href="#services">Data Recovery</a>
+                    <a href="#services">Business Registration</a>
+                    <a href="#services">Network Setup</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#about">About Us</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-phone"></i> +91 9906405769</p>
+                    <p><i class="fas fa-envelope"></i> sfayaz2005@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Chadoora, Budgam, J&K</p>
+                    <p><i class="fas fa-clock"></i> Mon-Sat: 9 AM - 8 PM | Sun: Closed</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Login Computers - Fayaz Ahmad. All rights reserved. | Designed with ❤️ for Kashmir</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        // Page Loading
+        window.addEventListener('load', function() {
+            document.getElementById('loader').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+            }, 500);
+        });
+
+        // Particles Animation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
-        // Form submission is now handled by Formspree
-        // Remove the old handleSubmit function as it's no longer needed
-
-        // Add scroll effect to service cards
+        // Scroll Animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -559,28 +1178,145 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        // Observe all service cards
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'all 0.6s ease';
-            observer.observe(card);
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
         });
 
-        // Add floating animation to CTA button
-        const ctaButton = document.querySelector('.cta-button');
-        setInterval(() => {
-            ctaButton.style.transform = 'translateY(-3px)';
-            setTimeout(() => {
-                ctaButton.style.transform = 'translateY(0)';
-            }, 1000);
-        }, 3000);
+        // Statistics Counter
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                element.textContent = Math.floor(current);
+                
+                if (current >= target) {
+                    element.textContent = target + (target === 5 ? '' : '+');
+                    clearInterval(timer);
+                }
+            }, 16);
+        }
+
+        // Animate statistics when visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        animateCounter(stat);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Header Scroll Effect
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            if (scrollTop > 100) {
+                header.style.background = 'rgba(12, 12, 12, 0.95)';
+            } else {
+                header.style.background = 'rgba(12, 12, 12, 0.8)';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // Service Cards Hover Effect
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Form Enhancement
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const submitBtn = this.querySelector('button[type="submit"]');
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.disabled = true;
+                
+                // Re-enable after 3 seconds (adjust based on your needs)
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+                    setTimeout(() => {
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                        submitBtn.disabled = false;
+                    }, 2000);
+                }, 1000);
+            });
+        }
+
+        // Initialize particles
+        createParticles();
+
+        // Mobile Menu Toggle (if needed)
+        const createMobileMenu = () => {
+            const nav = document.querySelector('nav');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (window.innerWidth <= 768) {
+                const menuToggle = document.createElement('button');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                menuToggle.style.cssText = `
+                    background: none;
+                    border: none;
+                    color: var(--text-primary);
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    display: block;
+                `;
+                
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('mobile-active');
+                });
+                
+                nav.appendChild(menuToggle);
+                
+                navLinks.style.cssText = `
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 100%;
+                    background: rgba(12, 12, 12, 0.95);
+                    flex-direction: column;
+                    padding: 1rem;
+                    transform: translateY(-100%);
+                    opacity: 0;
+                    transition: all 0.3s ease;
+                `;
+            }
+        };
+
+        window.addEventListener('resize', createMobileMenu);
+        createMobileMenu();
     </script>
 </body>
 </html>

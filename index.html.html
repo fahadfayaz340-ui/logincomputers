@@ -441,14 +441,14 @@
                 </div>
             </div>
             
-            <form class="contact-form" onsubmit="handleSubmit(event)">
+            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="_replyto" required>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
@@ -462,7 +462,40 @@
                     <label for="message">Message</label>
                     <textarea id="message" name="message" rows="5" placeholder="Please describe your requirements..."></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Send Message</button>
+                <button type="submit" class="submit-btn">Send Email</button>
+                
+                <!-- Alternative Contact Options -->
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p style="color: #666; margin-bottom: 1rem;"><strong>Or contact us directly:</strong></p>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <!-- WhatsApp Button -->
+                        <a href="https://wa.me/919906405769?text=Hi%20Fayaz%2C%20I%20need%20help%20with%20form%20applications%20and%20computer%20services" 
+                           target="_blank" 
+                           style="background: #25D366; color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;"
+                           onmouseover="this.style.background='#128C7E'"
+                           onmouseout="this.style.background='#25D366'">
+                            <span style="font-size: 1.2rem;">📱</span> WhatsApp Chat
+                        </a>
+                        
+                        <!-- Google Form Button -->
+                        <a href="https://forms.gle/YOUR_GOOGLE_FORM_LINK" 
+                           target="_blank" 
+                           style="background: #4285F4; color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;"
+                           onmouseover="this.style.background='#3367D6'"
+                           onmouseout="this.style.background='#4285F4'">
+                            <span style="font-size: 1.2rem;">📝</span> Google Form
+                        </a>
+                        
+                        <!-- Direct Call Button -->
+                        <a href="tel:+919906405769" 
+                           style="background: #FF6B35; color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;"
+                           onmouseover="this.style.background='#E55A2B'"
+                           onmouseout="this.style.background='#FF6B35'">
+                            <span style="font-size: 1.2rem;">📞</span> Call Now
+                        </a>
+                    </div>
+                </div>
             </form>
         </div>
     </section>
@@ -484,26 +517,8 @@
             });
         });
 
-        // Form submission handler
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(event.target);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                service: formData.get('service'),
-                message: formData.get('message')
-            };
-
-            // Show success message
-            alert(`Thank you, ${data.name}! Your inquiry has been received. We will contact you soon regarding your ${data.service} requirements.`);
-            
-            // Reset form
-            event.target.reset();
-        }
+        // Form submission is now handled by Formspree
+        // Remove the old handleSubmit function as it's no longer needed
 
         // Add scroll effect to service cards
         const observerOptions = {
